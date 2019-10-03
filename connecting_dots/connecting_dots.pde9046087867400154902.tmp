@@ -1,0 +1,28 @@
+int countDots = 6;
+int maxDots = 500;
+int dotSize = 20;
+int [][] dotsArray = new int[maxDots][2];  // Array to hold dots. 0 is x and 1 is y
+
+
+void setup() {
+  size(1000, 1000);
+  
+  fill(0,0,0);
+  
+  for (int i=0; i<countDots; i++) {
+    int xCoord = (int)random(10+dotSize, 990-dotSize);
+    int yCoord = (int)random(10, 990);
+    
+    dotsArray[i][0] = xCoord;
+    dotsArray[i][1] = yCoord;
+    
+    circle(xCoord, yCoord, dotSize);
+  }
+  
+  println(dotsArray[4]);
+}
+
+
+void draw() {
+  
+}

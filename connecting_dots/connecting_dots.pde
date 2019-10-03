@@ -14,7 +14,6 @@ void setup() {
   size(1000, 1000);
   
   fill(0,0,0);
-  circle(0,0,10);
   
   for (int i=0; i<countDots; i++) {
     int xCoord = (int)random(10+dotSize, canvasSizeX-10-dotSize);

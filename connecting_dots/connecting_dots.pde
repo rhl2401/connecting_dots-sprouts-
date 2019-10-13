@@ -61,17 +61,19 @@ void mousePressed() {
           workingDots[1][workingDotIndex] = i;
 
 
-          // countCOnnections == 2 is equal to 3 actual connections as we start from 0
+          // countConnections == 2 is equal to 3 actual connections as we start from 0
           if (workingDots[0][countConnections] >= 3 || workingDots[1][countConnections] >= 3) {
             gameOver = true;
             textSize(130);
             textAlign(CENTER, CENTER);
-            text("Game Over",500,450);
+            String playerWin = player1Turn ? "Player 1" : "Player 2";
+            text(playerWin + " wins!",500,450);
           } else {
             fill(0,0,0);
             circle(workingDots[0][xPos], workingDots[0][yPos], dotSize);
             
             line(workingDots[0][xPos], workingDots[0][yPos], workingDots[1][xPos], workingDots[1][yPos]);
+            
             
             
             // Calculate coordinates for new dot
@@ -89,6 +91,7 @@ void mousePressed() {
             }
             
             
+            
             // Insert new dot into array
             dotsArray[countDots][xPos] = newDotX;
             dotsArray[countDots][yPos] = newDotY;
@@ -101,6 +104,7 @@ void mousePressed() {
             
             circle(newDotX, newDotY, dotSize);
             isDrawingLine = false;
+            player1Turn = !player1Turn;
           }
           
         } else {

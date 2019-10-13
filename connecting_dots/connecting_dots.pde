@@ -5,11 +5,14 @@ int countDots = 6;
 int maxDots = 500;
 int dotSize = 20;
 int [][] dotsArray = new int[maxDots][3];  // Array to hold dots. 0 is x, 1 is y and 2 is how many lines connected
-int xPos=0, yPos=1, countConnections=2, workingDotIndex=3;
+int xPos=0, yPos=1, countConnections=2, workingDotIndex=3;    // Keep track of indexes
 
 int [][] workingDots = new int[2][4];   // Array to hold the two dots to draw the line between
-boolean isDrawingLine = false;
-boolean gameOver = false;
+
+// Booleans to keep track with states
+boolean isDrawingLine = false;    // True if one dit has been clicked and now waits for the second one
+boolean gameOver = false;    // Indicate if there is game over, then do not draw
+boolean player1Turn = true;    // If false, then it is player 2's turn
 
 
 void setup() {
@@ -42,6 +45,7 @@ void mousePressed() {
     
     for (int i=0; i<countDots; i++) {
       
+      // If mouse coordinates hit one of the dots
       if (mouseClickedX >= dotsArray[i][0]-dotSize/2 && 
           mouseClickedX <= dotsArray[i][0]+dotSize/2 && 
           mouseClickedY >= dotsArray[i][1]-dotSize/2 && 
@@ -49,19 +53,16 @@ void mousePressed() {
       {
         println("Ramte prik " + i);
         
-        
+        // Finish line if one dot has already been clicked, if not, then save this dot and proceed
         if (isDrawingLine) {
           workingDots[1][xPos] = dotsArray[i][xPos];
           workingDots[1][yPos] = dotsArray[i][yPos]; 
           workingDots[1][countConnections] = dotsArray[i][countConnections];
           workingDots[1][workingDotIndex] = i;
-          
-          println(workingDots[0]);
-          println(workingDots[1]);
-          
+
+
           // countCOnnections == 2 is equal to 3 actual connections as we start from 0
           if (workingDots[0][countConnections] >= 3 || workingDots[1][countConnections] >= 3) {
-            //background(255,0,0);    // Indicate game over
             gameOver = true;
             textSize(130);
             textAlign(CENTER, CENTER);
